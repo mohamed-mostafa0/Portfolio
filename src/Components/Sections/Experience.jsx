@@ -33,15 +33,51 @@ export default function Experience() {
   return (
     <div className="bg-[#030303] py-24 relative overflow-hidden transition-colors duration-500" id="experience">
       
-      {/* Background Elements */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:30px_30px]"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6b26d9]/5 to-transparent"></div>
+      {/* Animated Developer Background Elements */}
+      <div className="absolute inset-0 z-0 opacity-30 overflow-hidden pointer-events-none">
+        {/* Animated Grid Base */}
+        <motion.div 
+          className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:30px_30px]"
+          animate={{ backgroundPosition: ["0px 0px", "30px 30px"] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        ></motion.div>
+        
+        {/* Soft Ambient Light */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#6b26d9]/10 to-[#030303]"></div>
       </div>
 
-      {/* Background 3D Graphic */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-20 pointer-events-none z-0">
-         <Floating3DGeometry />
+      {/* Floating Code Symbols */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20">
+        {[
+          { symbol: "</>", top: "10%", left: "5%", duration: 15, delay: 0 },
+          { symbol: "{ }", top: "70%", left: "15%", duration: 20, delay: 2 },
+          { symbol: "()", top: "40%", left: "80%", duration: 18, delay: 1 },
+          { symbol: "[]", top: "80%", left: "75%", duration: 22, delay: 3 },
+          { symbol: "&&", top: "20%", left: "60%", duration: 16, delay: 0.5 },
+          { symbol: "||", top: "50%", left: "10%", duration: 19, delay: 1.5 },
+          { symbol: "=>", top: "90%", left: "40%", duration: 17, delay: 2.5 },
+          { symbol: "##", top: "15%", left: "90%", duration: 21, delay: 0.8 },
+        ].map((item, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-4xl md:text-6xl font-mono text-[#6b26d9] font-bold"
+            style={{ top: item.top, left: item.left }}
+            animate={{
+              y: [0, -40, 0],
+              x: [0, 30, 0],
+              rotate: [0, 15, -15, 0],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: item.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: item.delay,
+            }}
+          >
+            {item.symbol}
+          </motion.div>
+        ))}
       </div>
 
       <div className="max-w-[1200px] mx-auto px-6 relative z-10">

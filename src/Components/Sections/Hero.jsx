@@ -52,7 +52,12 @@ const GRADIENT_END = "#f6339a";
         </motion.span>
 
         <div className='font-extrabold text-5xl md:text-7xl lg:text-[80px] mb-8 tracking-tight leading-[1.1]'>
-          <SplitText text="Crafting Exceptional" delay={0.5} speed={0.03} className="justify-center" />
+          <SplitText 
+            text="Crafting Exceptional" 
+            delay={0.5} 
+            speed={0.03} 
+            className="justify-center bg-clip-text text-transparent bg-linear-to-r from-[#6b26d9] to-[#f6339a]" 
+          />
           <motion.span 
             initial={{opacity:0, scale: 0.9}}
             animate={{opacity:1, scale: 1}}

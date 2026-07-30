@@ -1,17 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export default function SplitText({ text, className = "", delay = 0, speed = 0.05 }) {
+export default function SplitText({ text, className = "", wordClassName = "", letterClassName = "", delay = 0, speed = 0.05 }) {
   
   // Split words first, then characters to handle spacing correctly
   const words = text.split(" ");
   
   const container = {
     hidden: { opacity: 0 },
-    visible: (i = 1) => ({
+    visible: {
       opacity: 1,
-      transition: { staggerChildren: speed, delayChildren: delay * i },
-    }),
+      transition: { 
+        staggerChildren: speed, 
+        delayChildren: delay 
+      },
+    },
   };
 
   const child = {
@@ -39,13 +42,17 @@ export default function SplitText({ text, className = "", delay = 0, speed = 0.0
       viewport={{ once: true }}
     >
       {words.map((word, index) => (
-        <span key={index} className="inline-block mr-[0.25em] whitespace-nowrap">
+        <motion.span 
+          key={index} 
+          variants={container} // Propagate variants to nested motion spans
+          className={`inline-block mr-[0.25em] whitespace-nowrap ${wordClassName}`}
+        >
           {Array.from(word).map((letter, index) => (
-            <motion.span variants={child} key={index} className="inline-block text-transparent bg-clip-text">
+            <motion.span variants={child} key={index} className={`inline-block ${letterClassName}`}>
               {letter}
             </motion.span>
           ))}
-        </span>
+        </motion.span>
       ))}
     </motion.div>
   );

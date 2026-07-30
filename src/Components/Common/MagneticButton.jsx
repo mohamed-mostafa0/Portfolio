@@ -25,7 +25,7 @@ export default function MagneticButton({ children, className = "", ...props }) {
   };
 
   return (  
-    <motion.button
+    <motion.div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -33,10 +33,10 @@ export default function MagneticButton({ children, className = "", ...props }) {
         x: mouseXSpring,
         y: mouseYSpring
       }}
-      className={`relative ${className}`}
+      className={`relative inline-block ${className}`}
       {...props}
     >
       {children}
-    </motion.button>
+    </motion.div>
   );
 }
